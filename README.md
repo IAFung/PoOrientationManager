@@ -1,0 +1,2 @@
+# PoOrientationManager
+ios rotation manager
