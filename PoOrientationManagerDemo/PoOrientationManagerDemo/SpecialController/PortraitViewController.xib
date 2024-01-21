@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PortraitViewController" customModule="PoOrientationManager" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PortraitViewController" customModule="PoOrientationManagerDemo" customModuleProvider="target">
             <connections>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -20,10 +20,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="wVu-q2-4h4">
-                    <rect key="frame" x="138.66666666666666" y="344.66666666666669" width="115.66666666666666" height="163"/>
+                    <rect key="frame" x="150" y="312.33333333333331" width="93.333333333333314" height="227.33333333333331"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sE4-86-pCl">
-                            <rect key="frame" x="0.0" y="0.0" width="115.66666666666667" height="34.333333333333336"/>
+                            <rect key="frame" x="0.0" y="0.0" width="93.333333333333329" height="34.333333333333336"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="切换横屏"/>
                             <connections>
@@ -31,7 +31,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c39-YA-DPm">
-                            <rect key="frame" x="0.0" y="64.333333333333314" width="115.66666666666667" height="34.333333333333343"/>
+                            <rect key="frame" x="0.0" y="64.333333333333371" width="93.333333333333329" height="34.333333333333343"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="切换竖屏"/>
                             <connections>
@@ -39,11 +39,19 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X1e-wo-gQF">
-                            <rect key="frame" x="0.0" y="128.66666666666663" width="115.66666666666667" height="34.333333333333343"/>
+                            <rect key="frame" x="0.0" y="128.66666666666669" width="93.333333333333329" height="34.333333333333343"/>
                             <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" title="push横竖屏"/>
+                            <buttonConfiguration key="configuration" style="plain" title="push"/>
                             <connections>
-                                <action selector="pushHPController" destination="-1" eventType="touchUpInside" id="Mrx-Bv-N6S"/>
+                                <action selector="push" destination="-1" eventType="touchUpInside" id="T0T-9C-4eP"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1hj-sM-OQU">
+                            <rect key="frame" x="0.0" y="193" width="93.333333333333329" height="34.333333333333343"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="present"/>
+                            <connections>
+                                <action selector="present" destination="-1" eventType="touchUpInside" id="hL8-0y-3VO"/>
                             </connections>
                         </button>
                     </subviews>

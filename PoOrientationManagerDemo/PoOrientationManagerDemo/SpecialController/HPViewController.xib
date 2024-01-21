@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HPViewController" customModule="PoOrientationManager" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HPViewController" customModule="PoOrientationManagerDemo" customModuleProvider="target">
             <connections>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -20,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="BvZ-TI-Gym">
-                    <rect key="frame" x="124.00000000000001" y="280.33333333333326" width="145.33333333333337" height="291.66666666666674"/>
+                    <rect key="frame" x="124.00000000000001" y="215.99999999999997" width="145.33333333333337" height="420.33333333333326"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OWS-oM-Dpo">
                             <rect key="frame" x="0.0" y="0.0" width="145.33333333333334" height="34.333333333333336"/>
@@ -31,7 +31,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VNQ-zE-5E2">
-                            <rect key="frame" x="0.0" y="64.333333333333371" width="145.33333333333334" height="34.333333333333343"/>
+                            <rect key="frame" x="0.0" y="64.333333333333314" width="145.33333333333334" height="34.333333333333343"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="切换竖屏"/>
                             <connections>
@@ -61,6 +61,22 @@
                             <buttonConfiguration key="configuration" style="plain" title="锁屏"/>
                             <connections>
                                 <action selector="lockOrUnlockScreen:" destination="-1" eventType="touchUpInside" id="FaW-EZ-ApV"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zkj-Sh-2El">
+                            <rect key="frame" x="0.0" y="321.66666666666663" width="145.33333333333334" height="34.333333333333314"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="push"/>
+                            <connections>
+                                <action selector="push" destination="-1" eventType="touchUpInside" id="dbk-2w-x5e"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mjm-fJ-eva">
+                            <rect key="frame" x="0.0" y="386" width="145.33333333333334" height="34.333333333333314"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title="present"/>
+                            <connections>
+                                <action selector="present" destination="-1" eventType="touchUpInside" id="ogt-o6-WjD"/>
                             </connections>
                         </button>
                     </subviews>

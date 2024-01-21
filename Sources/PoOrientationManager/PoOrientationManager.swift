@@ -19,7 +19,7 @@ public class PoOrientationManager: NSObject {
             
             let deviceOrientation = UIDevice.current.orientation
             if deviceOrientation == .portrait || deviceOrientation.isLandscape {
-                if let currentController =  UIViewController.currentViewController, currentController.currentOrientation != deviceOrientation.toInterfaceOrientation {
+                if let currentController =  UIViewController.poCurrentViewController, currentController.poCurrentOrientation != deviceOrientation.toInterfaceOrientation {
                     set(deviceOrientation.toInterfaceOrientation, to: currentController)
                 }
             }
@@ -27,15 +27,13 @@ public class PoOrientationManager: NSObject {
     }
     
     public func set(_ orientation: UIInterfaceOrientation, to viewController: UIViewController? = nil) {
-        guard let viewController = viewController ?? UIViewController.currentViewController,
+        guard let viewController = viewController ?? UIViewController.poCurrentViewController,
                 orientation != .unknown else { return }
         
-        if !viewController.validateOrientation(orientation) {
-            return
-        }
+        if !viewController.validateOrientation(orientation) { return }
         
-        viewController.currentMask = UIInterfaceOrientationMask(rawValue: 1 << orientation.rawValue)
-        viewController.currentOrientation = orientation
+        viewController.poCurrentSupportedInterfaceOrientations = UIInterfaceOrientationMask(rawValue: 1 << orientation.rawValue)
+        viewController.poCurrentOrientation = orientation
         
         if #available(iOS 16.0, *) {
             viewController.navigationController?.setNeedsUpdateOfSupportedInterfaceOrientations()
@@ -43,11 +41,10 @@ public class PoOrientationManager: NSObject {
             guard let scence = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
             let geometryPreferencesIOS = UIWindowScene.GeometryPreferences.iOS(interfaceOrientations: UIInterfaceOrientationMask(rawValue: 1 << orientation.rawValue))
             scence.requestGeometryUpdate(geometryPreferencesIOS) { error in
-//                print("OrientationManager \(type(of: viewController)) error: \(error)")
+                print("OrientationManager \(type(of: viewController)) error: \(error)")
             }
-            UIViewController.attemptRotationToDeviceOrientation()
         } else {
-            UIDevice.current.setValue(orientation.toDeviceOrientation, forKey: "orientation")
+            UIDevice.current.setValue(NSNumber(integerLiteral: orientation.toDeviceOrientation.rawValue), forKey: "orientation")
             UIViewController.attemptRotationToDeviceOrientation()
         }
     }
@@ -57,15 +54,10 @@ extension UIViewController {
     
     fileprivate func validateOrientation(_ orientation: UIInterfaceOrientation) -> Bool {
         let validMask = UIInterfaceOrientationMask(rawValue: 1 << orientation.rawValue)
-        if let tempSupportedMask {
-            return tempSupportedMask.contains(validMask)
+        if let poPreferredInterfaceOrientations {
+            return poPreferredInterfaceOrientations.contains(validMask)
         }
-        
-        if let preferredMask {
-            return preferredMask.contains(validMask)
-        }
-        
-        return supportedMask.contains(validMask)
+        return poSupportedInterfaceOrientations.contains(validMask)
     }
 }
 

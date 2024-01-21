@@ -10,28 +10,24 @@ import PoOrientationManager
 
 class HPViewController: UIViewController {
     
-    deinit {
-        print("HPViewController die")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "返回", style: .plain, target: self, action: #selector(handleDismissButtonClick))
         
-        supportedMask = .allButUpsideDown
+        poSupportedInterfaceOrientations = .allButUpsideDown
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        currentMask
+        poCurrentSupportedInterfaceOrientations
     }
     
     // MARK: - Action
     
     @IBAction
     func changeToHorizontal() {
-        PoOrientationManager.shared.set(.landscapeRight)
+        PoOrientationManager.shared.set(poDevicePreferredHorizontalInterfaceOrientation)
     }
     
     @IBAction
@@ -41,23 +37,37 @@ class HPViewController: UIViewController {
     
     @IBAction
     func changeToSupportPortrait() {
-        supportedMask = .portrait
+        poSupportedInterfaceOrientations = .portrait
     }
     
     @IBAction
     func changeToSupportAll() {
-        supportedMask = .allButUpsideDown
+        poSupportedInterfaceOrientations = .allButUpsideDown
     }
     
     @IBAction
     func lockOrUnlockScreen(_ sender: UIButton) {
-        if isRotationLockedBySubviews {
-            unlockRotation(by: view)
+        if poIsRotationLockedBySubviews {
+            poUnlockRotation(by: view)
             sender.setTitle("锁屏", for: .normal)
         } else {
-            lockRotation(by: view)
+            poLockRotation(by: view)
             sender.setTitle("解锁", for: .normal)
         }
+    }
+    
+    @IBAction
+    func push() {
+        let vc = HPViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction
+    func present() {
+        let vc = HPViewController()
+        let nav = NavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
     }
     
 }

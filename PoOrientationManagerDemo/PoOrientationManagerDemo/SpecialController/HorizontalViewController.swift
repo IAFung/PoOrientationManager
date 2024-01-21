@@ -18,11 +18,11 @@ class HorizontalViewController: UIViewController {
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return self.currentMask
+        poCurrentSupportedInterfaceOrientations
     }
     
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-        return self.devicePreferredHorizontalInterfaceOrientation
+        poDevicePreferredHorizontalInterfaceOrientation
     }
     
     // MARK: - Action
@@ -35,5 +35,19 @@ class HorizontalViewController: UIViewController {
     @IBAction
     func changeToPortrait() {
         PoOrientationManager.shared.set(.portrait)
+    }
+    
+    @IBAction
+    func push() {
+        let vc = HPViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction
+    func present() {
+        let vc = HPViewController()
+        let nav = NavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
     }
 }

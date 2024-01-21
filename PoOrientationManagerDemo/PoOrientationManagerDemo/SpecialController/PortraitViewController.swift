@@ -19,7 +19,7 @@ class PortraitViewController: UIViewController {
 
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return currentMask
+        poCurrentSupportedInterfaceOrientations
     }
     
     // MARK: - Action
@@ -35,9 +35,17 @@ class PortraitViewController: UIViewController {
     }
     
     @IBAction
-    func pushHPController() {
+    func push() {
         let vc = HPViewController()
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction
+    func present() {
+        let vc = HPViewController()
+        let nav = NavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
     }
 }
 

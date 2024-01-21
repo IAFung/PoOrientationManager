@@ -26,11 +26,12 @@ class ViewController: UIViewController {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        supportedMask = .allButUpsideDown
+        poSupportedInterfaceOrientations = .allButUpsideDown
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        poSupportedInterfaceOrientations = .allButUpsideDown
     }
     
     override func viewDidLoad() {
@@ -40,6 +41,14 @@ class ViewController: UIViewController {
         title = "rotate case"
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: NSStringFromClass(UITableViewCell.self))
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        poCurrentSupportedInterfaceOrientations
+    }
+    
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        poDevicePreferredHorizontalInterfaceOrientation
     }
 
 }
@@ -75,7 +84,7 @@ extension ViewController: UITableViewDelegate {
             navigationController?.pushViewController(vc, animated: true)
         case .pushToOnlyLandscape:
             let vc = HorizontalViewController()
-            vc.supportedMask = .landscape
+            vc.poSupportedInterfaceOrientations = .landscape
             vc.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(vc, animated: true)
         case .pushToAllButUpsideDown:
@@ -89,7 +98,7 @@ extension ViewController: UITableViewDelegate {
             present(nav, animated: true)
         case .presentToOnlyLandscape:
             let vc = HorizontalViewController()
-            vc.supportedMask = .landscape
+            vc.poSupportedInterfaceOrientations = .landscape
             let nav = NavigationController(rootViewController: vc)
             nav.modalPresentationStyle = .fullScreen
             present(nav, animated: true)
