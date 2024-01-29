@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIApplication {
-    public var poCurrentkeyWindow: UIWindow? {
+    var poCurrentkeyWindow: UIWindow? {
         if #available(iOS 15.0, *) {
             return self.connectedScenes
                 .filter { $0.activationState == .foregroundActive }
