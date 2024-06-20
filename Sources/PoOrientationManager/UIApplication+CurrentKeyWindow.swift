@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIApplication {
-    var poCurrentKeyWindow: UIWindow? {
+    internal var poCurrentKeyWindow: UIWindow? {
         if #available(iOS 15.0, *) {
             return connectedScenes.compactMap({ ($0 as? UIWindowScene)?.keyWindow }).last
         } else if #available(iOS 13.0, *) {

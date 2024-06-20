@@ -32,7 +32,7 @@ extension UIViewController {
     }
     
     /// 当前面首选支持的旋转方向
-    public var poPreferredInterfaceOrientations: UIInterfaceOrientationMask? {
+    internal var poPreferredInterfaceOrientations: UIInterfaceOrientationMask? {
         get { objc_getAssociatedObject(self, &AssociatedKeys.preferredInterfaceOrientations) as? UIInterfaceOrientationMask }
         set { objc_setAssociatedObject(self, &AssociatedKeys.preferredInterfaceOrientations, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC) }
     }

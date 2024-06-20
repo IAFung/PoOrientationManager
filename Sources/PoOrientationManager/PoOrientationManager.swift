@@ -7,11 +7,9 @@
 
 import UIKit
 
-public class PoOrientationManager: NSObject {
+public final class PoOrientationManager {
     public static let shared = PoOrientationManager()
-    private override init() {
-        super.init()
-        
+    private init() {
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
         NotificationCenter.default.addObserver(forName: UIDevice.orientationDidChangeNotification, object: nil, queue: nil) { [weak self] notification in
             guard let self else { return }

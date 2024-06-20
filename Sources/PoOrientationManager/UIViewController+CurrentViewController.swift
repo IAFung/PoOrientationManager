@@ -9,7 +9,7 @@ import UIKit
 
 extension UIViewController {
     
-    static var poCurrentViewController: UIViewController? {
+    internal static var poCurrentViewController: UIViewController? {
         UIViewController.topViewController(of: UIApplication.shared.poCurrentKeyWindow?.rootViewController)
     }
     
