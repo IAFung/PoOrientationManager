@@ -22,6 +22,7 @@ public final class PoOrientationManager {
                 }
             }
         }
+        UIDevice.current.endGeneratingDeviceOrientationNotifications()
     }
     
     public func set(_ orientation: UIInterfaceOrientation, to viewController: UIViewController? = nil) {
@@ -30,16 +31,19 @@ public final class PoOrientationManager {
         
         if !viewController.validateOrientation(orientation) { return }
         
-        viewController.poCurrentSupportedInterfaceOrientations = UIInterfaceOrientationMask(rawValue: 1 << orientation.rawValue)
+        viewController.poCurrentSupportedInterfaceOrientations = orientation.toInterfaceOrientationMask
         viewController.poCurrentOrientation = orientation
         
         if #available(iOS 16.0, *) {
-            viewController.navigationController?.setNeedsUpdateOfSupportedInterfaceOrientations()
-            viewController.setNeedsUpdateOfSupportedInterfaceOrientations()
             guard let scence = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
-            let geometryPreferencesIOS = UIWindowScene.GeometryPreferences.iOS(interfaceOrientations: UIInterfaceOrientationMask(rawValue: 1 << orientation.rawValue))
+//            viewController.navigationController?.setNeedsUpdateOfSupportedInterfaceOrientations()
+            viewController.setNeedsUpdateOfSupportedInterfaceOrientations()
+//            scence.windows.forEach({ $0.rootViewController?.setNeedsUpdateOfSupportedInterfaceOrientations() })
+            let geometryPreferencesIOS = UIWindowScene.GeometryPreferences.iOS(interfaceOrientations: orientation.toInterfaceOrientationMask)
             scence.requestGeometryUpdate(geometryPreferencesIOS) { error in
+#if DEBUG
                 print("OrientationManager \(type(of: viewController)) error: \(error)")
+#endif
             }
         } else {
             UIDevice.current.setValue(NSNumber(integerLiteral: orientation.toDeviceOrientation.rawValue), forKey: "orientation")
@@ -51,7 +55,7 @@ public final class PoOrientationManager {
 extension UIViewController {
     
     fileprivate func validateOrientation(_ orientation: UIInterfaceOrientation) -> Bool {
-        let validMask = UIInterfaceOrientationMask(rawValue: 1 << orientation.rawValue)
+        let validMask = orientation.toInterfaceOrientationMask
         if let poPreferredInterfaceOrientations {
             return poPreferredInterfaceOrientations.contains(validMask)
         }
@@ -98,5 +102,9 @@ extension UIInterfaceOrientation {
         @unknown default:
             .unknown
         }
+    }
+    
+    internal var toInterfaceOrientationMask: UIInterfaceOrientationMask {
+        UIInterfaceOrientationMask(rawValue: 1 << rawValue)
     }
 }

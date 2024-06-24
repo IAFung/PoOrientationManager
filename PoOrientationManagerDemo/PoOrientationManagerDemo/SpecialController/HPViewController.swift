@@ -10,17 +10,33 @@ import PoOrientationManager
 
 class HPViewController: UIViewController {
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        poSupportedInterfaceOrientations = .allButUpsideDown
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        poSupportedInterfaceOrientations = .allButUpsideDown
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "返回", style: .plain, target: self, action: #selector(handleDismissButtonClick))
-        
-        poSupportedInterfaceOrientations = .allButUpsideDown
+    }
+    
+    override var shouldAutorotate: Bool {
+        true
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         poCurrentSupportedInterfaceOrientations
+    }
+    
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        poDevicePreferredHorizontalInterfaceOrientation
     }
     
     // MARK: - Action

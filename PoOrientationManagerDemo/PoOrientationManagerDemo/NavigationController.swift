@@ -15,8 +15,16 @@ class NavigationController: UINavigationController {
         // Do any additional setup after loading the view.
     }
     
+    override var shouldAutorotate: Bool {
+        true
+    }
+    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         topViewController!.supportedInterfaceOrientations
+    }
+    
+    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
+        topViewController!.preferredInterfaceOrientationForPresentation
     }
 
 }

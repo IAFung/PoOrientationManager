@@ -46,10 +46,6 @@ class ViewController: UIViewController {
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         poCurrentSupportedInterfaceOrientations
     }
-    
-    override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
-        poDevicePreferredHorizontalInterfaceOrientation
-    }
 
 }
 

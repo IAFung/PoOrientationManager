@@ -44,7 +44,11 @@ extension UIViewController {
             if let value = objc_getAssociatedObject(self, &AssociatedKeys.currentSupportedInterfaceOrientations) as? UIInterfaceOrientationMask {
                 return value
             }
-            let support = self.poSupportedInterfaceOrientations
+            let support = poSupportedInterfaceOrientations
+            if poCurrentOrientation == .unknown, support.contains(preferredInterfaceOrientationForPresentation.toInterfaceOrientationMask) {
+                return preferredInterfaceOrientationForPresentation.toInterfaceOrientationMask
+            }
+            
             if support.contains(.portrait) {
                 return .portrait
             } else if support == .landscapeRight {
@@ -146,14 +150,25 @@ extension UIViewController {
         orientation_viewWillAppear(animated)
         poIsActive = true
         if notAllowCheckOrientation { return }
-        if presentingViewController != nil && modalPresentationStyle != .fullScreen { return }
+        if presentingViewController != nil && modalPresentationStyle == .fullScreen { return }
         
         var targetOrientation = poCurrentOrientation
         if targetOrientation == .unknown { // vc第一次展示
-            if poSupportedInterfaceOrientations == .landscape {
-                targetOrientation = preferredInterfaceOrientationForPresentation.isLandscape ? poDevicePreferredHorizontalInterfaceOrientation : preferredInterfaceOrientationForPresentation
+            if poSupportedInterfaceOrientations.contains(preferredInterfaceOrientationForPresentation.toInterfaceOrientationMask) {
+                targetOrientation = preferredInterfaceOrientationForPresentation
             } else {
-                targetOrientation = .portrait
+                let support = self.poSupportedInterfaceOrientations
+                if support.contains(.portrait) {
+                    targetOrientation = .portrait
+                } else if support == .landscapeRight {
+                    targetOrientation = .landscapeRight
+                } else if support == .landscapeLeft {
+                    targetOrientation = .landscapeLeft
+                } else if support == .landscape {
+                    targetOrientation = poDevicePreferredHorizontalInterfaceOrientation
+                } else {
+                    targetOrientation = .portrait
+                }
             }
         }
         PoOrientationManager.shared.set(targetOrientation, to: self)
